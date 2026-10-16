@@ -12,6 +12,8 @@ services:
         generateValue: true
       - key: DATABASE_URL
         value: sqlite:///./studysync.db
+      - key: ALLOWED_ORIGINS
+        value: "*"
       - key: SMTP_HOST
         sync: false
       - key: SMTP_PORT

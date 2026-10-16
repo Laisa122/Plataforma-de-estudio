@@ -44,11 +44,10 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
 
 # Configuración de CORS según el entorno
-allowed_origins = (
-    ["*"]
-    if settings.ENVIRONMENT != "production"
-    else ["https://studysync.onrender.com"]
-)
+if settings.ALLOWED_ORIGINS and settings.ALLOWED_ORIGINS.strip() != "*":
+    allowed_origins = [origin.strip() for origin in settings.ALLOWED_ORIGINS.split(",") if origin.strip()]
+else:
+    allowed_origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
