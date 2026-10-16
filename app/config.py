@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     SMTP_USER: str = ""
     SMTP_PASSWORD: str = ""
     EMAIL_FROM: str = "noreply@studysync.app"
+    ALLOWED_ORIGINS: str = "*"
 
     model_config = SettingsConfigDict(
         env_file=".env",
