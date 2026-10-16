@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudySync — Mis Materias</title>
+  <meta name="description" content="Gestiona y organiza tus asignaturas universitarias con StudySync.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="toast-container" class="toast-container"></div>
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">🎓</div>
+        <span class="logo-text">StudySync</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="/dashboard">
+          <span class="nav-link-icon">🏠</span>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-link active" href="/subjects">
+          <span class="nav-link-icon">📚</span>
+          <span>Materias</span>
+        </a>
+        <a class="nav-link" href="/tasks">
+          <span class="nav-link-icon">✅</span>
+          <span>Tareas</span>
+        </a>
+        <a class="nav-link" href="/groups">
+          <span class="nav-link-icon">👥</span>
+          <span>Grupos</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="user-avatar">U</div>
+        <div class="user-info">
+          <span class="user-name" id="user-name">Cargando...</span>
+          <span class="user-email" id="user-email">usuario@studysync.edu</span>
+        </div>
+        <button class="logout-btn" id="logout-btn" title="Cerrar sesión">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div style="flex: 1; display: flex; flex-direction: column;">
+      <!-- Mobile Bar -->
+      <header class="mobile-topbar">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1.5rem;">🎓</span>
+          <span style="font-weight: 700; font-size: 1.15rem; color: var(--text-primary);">StudySync</span>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
+          ☰
+        </button>
+      </header>
+
+      <main class="main-content">
+        <!-- Page Header -->
+        <header class="page-header">
+          <div class="flex-between">
+            <div>
+              <h2 class="page-title">📚 Mis Materias</h2>
+              <p class="page-subtitle">Organiza tus asignaturas, profesores y código de colores del período académico.</p>
+            </div>
+            <button class="btn btn-primary" id="add-subject-btn">
+              + Nueva Materia
+            </button>
+          </div>
+        </header>
+
+        <!-- Subjects Grid -->
+        <section class="grid-3" id="subjects-grid">
+          <!-- Rendered dynamically by subjects.js -->
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Subject Create / Edit Modal -->
+  <div class="modal-overlay" id="subject-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Nueva Materia</h3>
+        <button type="button" class="close-btn" id="modal-close" aria-label="Cerrar modal">✕</button>
+      </div>
+
+      <form id="subject-form" class="modal-form">
+        <div class="form-group">
+          <label class="form-label" for="subject-name">Nombre de la materia *</label>
+          <input type="text" id="subject-name" class="form-input" placeholder="Ej: Cálculo Diferencial" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subject-professor">Profesor (Opcional)</label>
+          <input type="text" id="subject-professor" class="form-input" placeholder="Ej: Dr. Roberto Gómez">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subject-semester">Semestre (Opcional)</label>
+          <input type="text" id="subject-semester" class="form-input" placeholder="Ej: 2024-2">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Color Distintivo</label>
+          <div class="color-picker-row" id="color-picker-row">
+            <!-- Dynamically generated color options -->
+          </div>
+          <input type="hidden" id="selected-color" value="#6366f1">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="modal-cancel">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar Materia</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/subjects.js"></script>
+</body>
+</html>

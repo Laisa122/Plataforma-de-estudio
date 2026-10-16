@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudySync — Mis Tareas</title>
+  <meta name="description" content="Gestiona tus entregas académicas, proyectos y fechas límites con StudySync.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="toast-container" class="toast-container"></div>
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">🎓</div>
+        <span class="logo-text">StudySync</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="/dashboard">
+          <span class="nav-link-icon">🏠</span>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-link" href="/subjects">
+          <span class="nav-link-icon">📚</span>
+          <span>Materias</span>
+        </a>
+        <a class="nav-link active" href="/tasks">
+          <span class="nav-link-icon">✅</span>
+          <span>Tareas</span>
+        </a>
+        <a class="nav-link" href="/groups">
+          <span class="nav-link-icon">👥</span>
+          <span>Grupos</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="user-avatar">U</div>
+        <div class="user-info">
+          <span class="user-name" id="user-name">Cargando...</span>
+          <span class="user-email" id="user-email">usuario@studysync.edu</span>
+        </div>
+        <button class="logout-btn" id="logout-btn" title="Cerrar sesión">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div style="flex: 1; display: flex; flex-direction: column;">
+      <!-- Mobile Bar -->
+      <header class="mobile-topbar">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1.5rem;">🎓</span>
+          <span style="font-weight: 700; font-size: 1.15rem; color: var(--text-primary);">StudySync</span>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
+          ☰
+        </button>
+      </header>
+
+      <main class="main-content">
+        <!-- Page Header -->
+        <header class="page-header">
+          <div class="flex-between">
+            <div>
+              <h2 class="page-title">✅ Mis Tareas</h2>
+              <p class="page-subtitle">Organiza tus tareas pendientes, cambia estados con un clic y filtra por materia.</p>
+            </div>
+            <button class="btn btn-primary" id="add-task-btn">
+              + Nueva Tarea
+            </button>
+          </div>
+        </header>
+
+        <!-- Filters Bar -->
+        <section class="filters-bar">
+          <select class="filter-select" id="filter-subject">
+            <option value="">Todas las materias</option>
+          </select>
+
+          <select class="filter-select" id="filter-status">
+            <option value="">Todos los estados</option>
+            <option value="pending">Pendientes</option>
+            <option value="in_progress">En progreso</option>
+            <option value="done">Completadas</option>
+          </select>
+
+          <select class="filter-select" id="filter-priority">
+            <option value="">Todas las prioridades</option>
+            <option value="high">Alta</option>
+            <option value="medium">Media</option>
+            <option value="low">Baja</option>
+          </select>
+        </section>
+
+        <!-- Tasks List Container -->
+        <section class="tasks-list" id="tasks-list">
+          <!-- Rendered dynamically by tasks.js -->
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Task Create / Edit Modal -->
+  <div class="modal-overlay" id="task-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="task-modal-title">Nueva Tarea</h3>
+        <button type="button" class="close-btn" id="task-modal-close" aria-label="Cerrar modal">✕</button>
+      </div>
+
+      <form id="task-form" class="modal-form">
+        <div class="form-group">
+          <label class="form-label" for="task-title-input">Título de la tarea *</label>
+          <input type="text" id="task-title-input" class="form-input" placeholder="Ej: Taller 1 de Integrales" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-description">Descripción</label>
+          <textarea id="task-description" class="form-textarea" placeholder="Detalles de la entrega, enlaces o requisitos..."></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="task-due-date">Fecha de Entrega</label>
+            <input type="date" id="task-due-date" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="task-priority">Prioridad</label>
+            <select id="task-priority" class="filter-select" style="width: 100%;">
+              <option value="low">Baja</option>
+              <option value="medium" selected>Media</option>
+              <option value="high">Alta</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-subject">Materia Asociada</label>
+          <select id="task-subject" class="filter-select" style="width: 100%;">
+            <option value="">Sin materia asignada</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="task-modal-cancel">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar Tarea</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/tasks.js"></script>
+</body>
+</html>

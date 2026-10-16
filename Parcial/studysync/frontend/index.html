@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudySync — Inicia sesión y colabora</title>
+  <meta name="description" content="Organiza tus materias, gestiona tareas académicas y colabora en grupos de estudio con StudySync.">
+  <meta name="keywords" content="estudio, tareas, materias, grupos universitarios, productividad académica">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="toast-container" class="toast-container"></div>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <!-- Brand Logo -->
+      <div class="auth-logo">
+        <div class="auth-logo-icon">🎓</div>
+        <h1>StudySync</h1>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="auth-tabs">
+        <button type="button" class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+        <button type="button" class="tab-btn" data-tab="register">Registrarse</button>
+      </div>
+
+      <!-- Step 1: Login Form -->
+      <div class="form-step active" id="step-login">
+        <div class="alert" id="login-alert"></div>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Correo Electrónico</label>
+            <input type="email" id="login-email" class="form-input" placeholder="ejemplo@universidad.edu.co" autocomplete="email" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Contraseña</label>
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" autocomplete="current-password" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1rem;">
+            Iniciar Sesión
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          ¿No tienes una cuenta aún? <a href="#" class="go-to-register">Crea una cuenta aquí</a>
+        </div>
+      </div>
+
+      <!-- Step 2: Register Form -->
+      <div class="form-step" id="step-register">
+        <div class="alert" id="register-alert"></div>
+
+        <form id="register-form">
+          <div class="form-group">
+            <label class="form-label" for="register-name">Nombre Completo</label>
+            <input type="text" id="register-name" class="form-input" placeholder="Tu nombre y apellido" autocomplete="name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="register-email">Correo Electrónico</label>
+            <input type="email" id="register-email" class="form-input" placeholder="ejemplo@universidad.edu.co" autocomplete="email" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="register-password">Contraseña</label>
+            <input type="password" id="register-password" class="form-input" placeholder="Mínimo 6 caracteres" autocomplete="new-password" required minlength="6">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1rem;">
+            Crear Cuenta
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          ¿Ya tienes cuenta registrada? <a href="#" class="go-to-login">Inicia sesión</a>
+        </div>
+      </div>
+
+      <!-- Step 3: OTP Verification Form -->
+      <div class="form-step" id="step-otp">
+        <button type="button" class="btn-text" id="otp-back-btn" style="margin-bottom: 0.75rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+          ← Volver al login
+        </button>
+
+        <div class="otp-header">
+          <h2 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary);">Verificación de Cuenta</h2>
+          <p>Ingresa el código de 6 dígitos que enviamos a <br><span class="otp-email-highlight" id="otp-email-display">tu correo</span></p>
+        </div>
+
+        <div class="alert" id="otp-alert"></div>
+
+        <form id="otp-form">
+          <div class="otp-inputs">
+            <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" required>
+            <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1rem;">
+            Verificar y Activar Cuenta
+          </button>
+        </form>
+
+        <div class="auth-footer" style="margin-top: 1.5rem;">
+          ¿No recibiste el código?
+          <button type="button" class="btn-text" id="resend-otp-btn" style="color: var(--color-primary); font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; margin-left: 4px;">
+            Reenviar código
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>
