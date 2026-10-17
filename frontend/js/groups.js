@@ -71,12 +71,11 @@ function renderGroups() {
   if (!groups || groups.length === 0) {
     grid.innerHTML = `
       <div class="empty-state" style="grid-column: 1 / -1;">
-        <div class="empty-state-icon">👥</div>
         <div class="empty-state-title">No perteneces a ningún grupo</div>
         <div class="empty-state-desc">Crea un grupo de estudio con tus compañeros o únete a uno mediante un código de invitación.</div>
         <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
           <button class="btn btn-primary" onclick="openCreateModal()">+ Crear Grupo</button>
-          <button class="btn btn-outline" onclick="openJoinModal()">🔗 Unirse con Código</button>
+          <button class="btn btn-outline" onclick="openJoinModal()">Unirse con código</button>
         </div>
       </div>
     `;
@@ -90,7 +89,7 @@ function renderGroups() {
       <div class="group-card" id="group-card-${group.id}">
         <div class="group-card-header">
           <h3 class="group-name">${escapeHtml(group.name)}</h3>
-          <span class="badge badge-subject">👥 Grupo</span>
+          <span class="badge badge-subject">Grupo</span>
         </div>
 
         <p class="group-description">
@@ -99,20 +98,20 @@ function renderGroups() {
 
         <div class="invite-code-box">
           <div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Código de invitación</div>
+            <div class="invite-code-label">Código de invitación</div>
             <div class="invite-code">${escapeHtml(inviteCode)}</div>
           </div>
           <button class="copy-btn" onclick="copyCode('${escapeHtml(inviteCode)}')" title="Copiar código">
-            📋 Copiar
+            Copiar
           </button>
         </div>
 
         <div class="group-actions">
           <button class="btn btn-outline btn-sm" onclick="viewMembers(${group.id}, '${escapedName}')" style="flex: 1;">
-            👥 Ver Miembros
+            Ver miembros
           </button>
           <button class="btn btn-danger btn-sm" onclick="leaveGroup(${group.id}, '${escapedName}')" title="Salir del grupo">
-            🚪 Salir
+            Salir
           </button>
         </div>
       </div>

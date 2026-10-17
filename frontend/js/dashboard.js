@@ -35,41 +35,20 @@ function setupLogout() {
  */
 async function loadDashboardData() {
   try {
-    const [subjectsRes, tasksRes, groupsRes] = await Promise.all([
+    const [subjectsRes, tasksRes] = await Promise.all([
       apiRequest('GET', '/subjects/'),
-      apiRequest('GET', '/tasks/'),
-      apiRequest('GET', '/groups/')
+      apiRequest('GET', '/tasks/')
     ]);
 
     const subjects = subjectsRes.ok ? await subjectsRes.json() : [];
     const tasks = tasksRes.ok ? await tasksRes.json() : [];
-    const groups = groupsRes.ok ? await groupsRes.json() : [];
 
-    renderStats(subjects, tasks, groups);
     renderUpcomingTasks(tasks, subjects);
     renderRecentSubjects(subjects);
   } catch (error) {
     console.error('Error loading dashboard data:', error);
     showToast('Error al cargar la información del panel', 'error');
   }
-}
-
-/**
- * Renders summary metrics in stat cards
- */
-function renderStats(subjects = [], tasks = [], groups = []) {
-  const statSubjects = document.getElementById('stat-subjects');
-  const statPending = document.getElementById('stat-pending');
-  const statOverdue = document.getElementById('stat-overdue');
-  const statGroups = document.getElementById('stat-groups');
-
-  const pendingCount = tasks.filter(t => t.status === 'pending' || t.status === 'in_progress').length;
-  const overdueCount = tasks.filter(t => t.status !== 'done' && isOverdue(t.due_date)).length;
-
-  if (statSubjects) statSubjects.textContent = subjects.length;
-  if (statPending) statPending.textContent = pendingCount;
-  if (statOverdue) statOverdue.textContent = overdueCount;
-  if (statGroups) statGroups.textContent = groups.length;
 }
 
 /**
@@ -92,7 +71,7 @@ function renderUpcomingTasks(tasks = [], subjects = []) {
   if (pendingWithDue.length === 0) {
     container.innerHTML = `
       <div class="empty-state">
-        <div class="empty-state-icon">🎉</div>
+        <div class="empty-state-icon"></div>
         <div class="empty-state-title">Todo al día</div>
         <div class="empty-state-desc">No tienes tareas pendientes con fechas próximas. ¡Buen trabajo!</div>
       </div>
@@ -114,10 +93,10 @@ function renderUpcomingTasks(tasks = [], subjects = []) {
             <div class="task-content">
               <span class="task-title">${escapeHtml(task.title)}</span>
               <div class="task-meta">
-                ${subj ? `<span class="badge badge-subject" style="border-left: 3px solid ${subj.color || '#6366f1'}">${escapeHtml(subj.name)}</span>` : ''}
+                ${subj ? `<span class="badge badge-subject">${escapeHtml(subj.name)}</span>` : ''}
                 <span class="badge badge-${task.priority || 'medium'}">${task.priority || 'media'}</span>
                 <span class="due-date ${overdue ? 'overdue' : ''}">
-                  📅 ${formatDate(task.due_date)} ${overdue ? '(Vencida)' : ''}
+                  ${formatDate(task.due_date)} ${overdue ? '(Vencida)' : ''}
                 </span>
               </div>
             </div>
@@ -140,7 +119,6 @@ function renderRecentSubjects(subjects = []) {
   if (recent.length === 0) {
     container.innerHTML = `
       <div class="empty-state">
-        <div class="empty-state-icon">📚</div>
         <div class="empty-state-title">Sin materias registradas</div>
         <div class="empty-state-desc">Aún no has agregado materias a tu semestre.</div>
         <a href="/subjects" class="btn btn-outline btn-sm" style="margin-top: 1rem;">+ Agregar Materia</a>
@@ -150,20 +128,19 @@ function renderRecentSubjects(subjects = []) {
   }
 
   container.innerHTML = `
-    <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+    <div class="recent-subjects-list">
       ${recent.map(subj => {
-        const color = subj.color || '#6366f1';
         return `
-          <div style="background: rgba(15, 23, 42, 0.45); border: 1px solid var(--border-color); border-left: 4px solid ${color}; border-radius: 10px; padding: 0.9rem 1.1rem; display: flex; align-items: center; justify-content: space-between;">
+          <div class="recent-subject-item">
             <div>
-              <div style="font-weight: 600; color: var(--text-primary); font-size: 0.95rem;">${escapeHtml(subj.name)}</div>
-              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">
-                ${subj.professor ? `👨‍🏫 ${escapeHtml(subj.professor)}` : ''} 
-                ${subj.semester ? ` • 📅 ${escapeHtml(subj.semester)}` : ''}
+              <div class="recent-subject-name">${escapeHtml(subj.name)}</div>
+              <div class="recent-subject-meta">
+                ${subj.professor ? `Docente: ${escapeHtml(subj.professor)}` : ''} 
+                ${subj.semester ? `| Semestre: ${escapeHtml(subj.semester)}` : ''}
               </div>
             </div>
-            <a href="/tasks" class="btn btn-icon btn-sm" title="Ver tareas">
-              ➜
+            <a href="/tasks" class="btn btn-outline btn-sm" title="Ver tareas de la materia">
+              Ver tareas
             </a>
           </div>
         `;

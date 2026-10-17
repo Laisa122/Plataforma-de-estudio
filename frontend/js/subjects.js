@@ -88,9 +88,8 @@ function renderSubjects() {
   if (!subjects || subjects.length === 0) {
     grid.innerHTML = `
       <div class="empty-state" style="grid-column: 1 / -1;">
-        <div class="empty-state-icon">📚</div>
-        <div class="empty-state-title">No hay materias aún</div>
-        <div class="empty-state-desc">Comienza agregando tus asignaturas de este período académico.</div>
+        <div class="empty-state-title">No hay materias registradas</div>
+        <div class="empty-state-desc">Comienza agregando las asignaturas correspondientes a tu período académico.</div>
         <button class="btn btn-primary" onclick="openModal()" style="margin-top: 1rem;">
           + Agregar Materia
         </button>
@@ -100,26 +99,24 @@ function renderSubjects() {
   }
 
   grid.innerHTML = subjects.map(subject => {
-    const color = subject.color || '#6366f1';
     return `
-      <div class="subject-card" style="--subject-color: ${color};">
+      <div class="subject-card">
         <div>
           <div class="subject-card-header">
             <h3 class="subject-name">${escapeHtml(subject.name)}</h3>
-            <span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background-color: ${color}; flex-shrink: 0;" title="Color asignado"></span>
           </div>
 
           <div class="subject-meta">
             ${subject.professor ? `
               <div class="subject-meta-item">
-                <span>👨‍🏫</span>
+                <span class="meta-label">Docente:</span>
                 <span>${escapeHtml(subject.professor)}</span>
               </div>
             ` : ''}
             ${subject.semester ? `
               <div class="subject-meta-item">
-                <span>📅</span>
-                <span>Semestre: ${escapeHtml(subject.semester)}</span>
+                <span class="meta-label">Semestre:</span>
+                <span>${escapeHtml(subject.semester)}</span>
               </div>
             ` : ''}
           </div>
@@ -127,10 +124,10 @@ function renderSubjects() {
 
         <div class="subject-actions">
           <button class="btn btn-outline btn-sm" onclick="openModal(${subject.id})" style="flex: 1;">
-            ✏️ Editar
+            Editar
           </button>
-          <button class="btn btn-danger btn-sm" onclick="deleteSubject(${subject.id}, '${escapeHtml(subject.name).replace(/'/g, "\\'")}')" style="padding: 0.45rem 0.75rem;" title="Eliminar materia">
-            🗑️
+          <button class="btn btn-danger btn-sm" onclick="deleteSubject(${subject.id}, '${escapeHtml(subject.name).replace(/'/g, "\\'")}')" style="padding: 0.35rem 0.65rem;" title="Eliminar materia">
+            Eliminar
           </button>
         </div>
       </div>

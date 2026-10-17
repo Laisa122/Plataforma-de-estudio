@@ -130,7 +130,7 @@ function renderTasks() {
   if (!tasks || tasks.length === 0) {
     listContainer.innerHTML = `
       <div class="empty-state">
-        <div class="empty-state-icon">📋</div>
+        
         <div class="empty-state-title">No hay tareas encontradas</div>
         <div class="empty-state-desc">No se encontraron tareas con los filtros seleccionados. Crea una nueva tarea para comenzar.</div>
         <button class="btn btn-primary" onclick="openTaskModal()" style="margin-top: 1rem;">
@@ -162,21 +162,21 @@ function renderTasks() {
           <span class="task-title">${escapeHtml(task.title)}</span>
           ${task.description ? `<p class="task-description">${escapeHtml(task.description)}</p>` : ''}
           <div class="task-meta">
-            ${subj ? `<span class="badge badge-subject" style="border-left: 3px solid ${subj.color || '#6366f1'}">${escapeHtml(subj.name)}</span>` : ''}
+            ${subj ? `<span class="badge badge-subject">${escapeHtml(subj.name)}</span>` : ''}
             <span class="badge badge-${task.priority || 'medium'}">${getPriorityLabel(task.priority)}</span>
             <span class="badge badge-${statusClass}">${getStatusLabel(task.status)}</span>
             <span class="due-date ${isTaskOverdue ? 'overdue' : ''}">
-              📅 ${formatDate(task.due_date)} ${isTaskOverdue ? '(Vencida)' : ''}
+              ${formatDate(task.due_date)} ${isTaskOverdue ? '(Vencida)' : ''}
             </span>
           </div>
         </div>
 
         <div class="task-actions">
-          <button class="btn btn-icon btn-sm" onclick="openTaskModal(${task.id})" title="Editar tarea">
-            ✏️
+          <button class="btn btn-outline btn-sm" onclick="openTaskModal(${task.id})" title="Editar tarea">
+            Editar
           </button>
-          <button class="btn btn-icon btn-sm" onclick="deleteTask(${task.id})" title="Eliminar tarea" style="color: var(--color-danger);">
-            🗑️
+          <button class="btn btn-danger btn-sm" onclick="deleteTask(${task.id})" title="Eliminar tarea">
+            Eliminar
           </button>
         </div>
       </div>
