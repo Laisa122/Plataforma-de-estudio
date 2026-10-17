@@ -18,25 +18,25 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <div class="logo-icon">🎓</div>
+       
         <span class="logo-text">StudySync</span>
       </div>
 
       <nav class="sidebar-nav">
         <a class="nav-link active" href="/dashboard">
-          <span class="nav-link-icon">🏠</span>
+          <span class="nav-link-icon"></span>
           <span>Dashboard</span>
         </a>
         <a class="nav-link" href="/subjects">
-          <span class="nav-link-icon">📚</span>
+          <span class="nav-link-icon"></span>
           <span>Materias</span>
         </a>
         <a class="nav-link" href="/tasks">
-          <span class="nav-link-icon">✅</span>
+          <span class="nav-link-icon"></span>
           <span>Tareas</span>
         </a>
         <a class="nav-link" href="/groups">
-          <span class="nav-link-icon">👥</span>
+          <span class="nav-link-icon"></span>
           <span>Grupos</span>
         </a>
       </nav>
@@ -47,9 +47,7 @@
           <span class="user-name" id="user-name">Cargando...</span>
           <span class="user-email" id="user-email">usuario@studysync.edu</span>
         </div>
-        <button class="logout-btn" id="logout-btn" title="Cerrar sesión">
-          🚪
-        </button>
+        <button class="logout-btn" id="logout-btn" title="Cerrar sesión">Salir</button>
       </div>
     </aside>
 
@@ -58,7 +56,6 @@
       <!-- Mobile Bar -->
       <header class="mobile-topbar">
         <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <span style="font-size: 1.5rem;">🎓</span>
           <span style="font-weight: 700; font-size: 1.15rem; color: var(--text-primary);">StudySync</span>
         </div>
         <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
@@ -70,50 +67,15 @@
         <!-- Page Header -->
         <header class="page-header">
           <h2 class="page-title">Resumen Académico</h2>
-          <p class="page-subtitle">Bienvenido a tu espacio de estudio. Aquí tienes el estado general de tu semestre.</p>
+          <p class="page-subtitle">Seguimiento de materias y próximas entregas.</p>
         </header>
-
-        <!-- Stats Grid -->
-        <section class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon purple">📚</div>
-            <div class="stat-details">
-              <span class="stat-value" id="stat-subjects">0</span>
-              <span class="stat-label">Materias Inscritas</span>
-            </div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon orange">⏰</div>
-            <div class="stat-details">
-              <span class="stat-value" id="stat-pending">0</span>
-              <span class="stat-label">Tareas Pendientes</span>
-            </div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon blue">📅</div>
-            <div class="stat-details">
-              <span class="stat-value" id="stat-overdue">0</span>
-              <span class="stat-label">Tareas Vencidas</span>
-            </div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon green">👥</div>
-            <div class="stat-details">
-              <span class="stat-value" id="stat-groups">0</span>
-              <span class="stat-label">Grupos de Estudio</span>
-            </div>
-          </div>
-        </section>
 
         <!-- 2 Column Widgets -->
         <div class="grid-2">
           <!-- Upcoming Tasks Card -->
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">⏰ Próximas Entregas</h3>
+              <h3 class="card-title">Próximas Entregas</h3>
               <a href="/tasks" class="btn btn-outline btn-sm">Ver todas</a>
             </div>
             <div id="upcoming-tasks">
@@ -126,7 +88,7 @@
           <!-- Recent Subjects Card -->
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">📚 Mis Materias</h3>
+              <h3 class="card-title">Mis Materias</h3>
               <a href="/subjects" class="btn btn-outline btn-sm">Gestionar</a>
             </div>
             <div id="recent-subjects">
@@ -140,7 +102,7 @@
     </div>
   </div>
 
-  <script src="/js/api.js"></script>
-  <script src="/js/dashboard.js"></script>
+  <script src="/js/api.js?v=2"></script>
+  <script src="/js/dashboard.js?v=2"></script>
 </body>
 </html>

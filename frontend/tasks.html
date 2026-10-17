@@ -18,25 +18,25 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <div class="logo-icon">🎓</div>
+       
         <span class="logo-text">StudySync</span>
       </div>
 
       <nav class="sidebar-nav">
         <a class="nav-link" href="/dashboard">
-          <span class="nav-link-icon">🏠</span>
+          <span class="nav-link-icon"></span>
           <span>Dashboard</span>
         </a>
         <a class="nav-link" href="/subjects">
-          <span class="nav-link-icon">📚</span>
+          <span class="nav-link-icon"></span>
           <span>Materias</span>
         </a>
         <a class="nav-link active" href="/tasks">
-          <span class="nav-link-icon">✅</span>
+          <span class="nav-link-icon"></span>
           <span>Tareas</span>
         </a>
         <a class="nav-link" href="/groups">
-          <span class="nav-link-icon">👥</span>
+          <span class="nav-link-icon"></span>
           <span>Grupos</span>
         </a>
       </nav>
@@ -47,9 +47,7 @@
           <span class="user-name" id="user-name">Cargando...</span>
           <span class="user-email" id="user-email">usuario@studysync.edu</span>
         </div>
-        <button class="logout-btn" id="logout-btn" title="Cerrar sesión">
-          🚪
-        </button>
+        <button class="logout-btn" id="logout-btn" title="Cerrar sesión">Salir</button>
       </div>
     </aside>
 
@@ -58,7 +56,6 @@
       <!-- Mobile Bar -->
       <header class="mobile-topbar">
         <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <span style="font-size: 1.5rem;">🎓</span>
           <span style="font-weight: 700; font-size: 1.15rem; color: var(--text-primary);">StudySync</span>
         </div>
         <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
@@ -71,8 +68,8 @@
         <header class="page-header">
           <div class="flex-between">
             <div>
-              <h2 class="page-title">✅ Mis Tareas</h2>
-              <p class="page-subtitle">Organiza tus tareas pendientes, cambia estados con un clic y filtra por materia.</p>
+              <h2 class="page-title">Mis Tareas</h2>
+              <p class="page-subtitle">Seguimiento de tareas académicas y filtrado por estado o materia.</p>
             </div>
             <button class="btn btn-primary" id="add-task-btn">
               + Nueva Tarea
@@ -159,7 +156,7 @@
     </div>
   </div>
 
-  <script src="/js/api.js"></script>
-  <script src="/js/tasks.js"></script>
+  <script src="/js/api.js?v=2"></script>
+  <script src="/js/tasks.js?v=2"></script>
 </body>
 </html>
